@@ -2,7 +2,6 @@
 
 /**
  * tok_args - function that tokenise arguments
- * @cmd: command name
  * @line_buffer: line buffer parameter
  * @line_buffer_cpy: line buffer copy parameter
  * @arg_count: custom argument count
@@ -10,7 +9,7 @@
  * Return: (0)
  */
 
-int tok_args(char *cmd, char *line_buffer, char *line_buffer_cpy,
+int tok_args(char *line_buffer, char *line_buffer_cpy,
 		int *arg_count, char ***arg_vector)
 {
 	char *delimiter;
@@ -32,7 +31,8 @@ int tok_args(char *cmd, char *line_buffer, char *line_buffer_cpy,
 	*arg_vector = malloc(sizeof(char *) * (*arg_count + 1));
 	if (*arg_vector == NULL)
 	{
-		perror(cmd);
+		free(line_buffer);
+		free(line_buffer_cpy);
 		exit(1);
 	}
 

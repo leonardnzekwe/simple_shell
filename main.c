@@ -15,7 +15,7 @@ int main(int ac, char **av)
 	{
 		av = av + 1;
 		ac = ac - 1;
-		exe_args(cmd, av, ac);
+		exe_args(cmd, av, ac, NULL, NULL);
 	}
 	else
 	{

@@ -26,50 +26,22 @@ int get_args(char *cmd)
 		if (num_char_read == -1)
 		{
 			/* catch getline() failure scenarios */
-			if (line_buffer != NULL)
-			{
-				/* (CTRL + D) or end-of-file reached */
-				if (line_buffer[0] == '\0')
-				{
-					/* End of file reached */
-					printf("End-of-file reached.\n");
-					free(line_buffer);
-					exit(0);
-				}
-				else
-				{
-					/* An error occurred during input */
-					printf("An error occurred during input.\n");
-					free(line_buffer);
-					exit(1);
-				}
-			}
-			else
-			{
-				/* Memory allocation failed */
-				printf("Memory allocation failed.\n");
-				exit(1);
-			}
+			check_get_args(line_buffer);
 		}
 		else
 		{
 			cpy_args(line_buffer, &line_buffer_cpy);
-			tok_args(cmd, line_buffer, line_buffer_cpy, &arg_count, &arg_vector);
+			tok_args(line_buffer, line_buffer_cpy, &arg_count, &arg_vector);
+
 			/* getline() succeded */
 			if (arg_count > 1)
-			{
 				dprintf(2, "%s: No such file or directory\n", cmd);
-			}
 			else
-			{
-				exe_args(cmd, arg_vector, arg_count);
-			}
+				exe_args(cmd, arg_vector, arg_count, line_buffer, line_buffer_cpy);
 		}
 		free(line_buffer_cpy);
 		free(arg_vector);
 	}
-
 	free(line_buffer);
-
 	return (0);
 }

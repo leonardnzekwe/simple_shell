@@ -21,6 +21,7 @@ int cpy_args(char *line_buffer, char **line_buffer_cpy)
 	*line_buffer_cpy = malloc(len + 1);
 	if (*line_buffer_cpy == NULL)
 	{
+		free(line_buffer);
 		exit(1);
 	}
 
