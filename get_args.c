@@ -2,11 +2,11 @@
 
 /**
  * get_args - Get Arguments
- * @cmd: command name
+ * @exe: executable file name
  * Return: On Success (0)
  */
 
-int get_args(char *cmd)
+int get_args(char *exe)
 {
 	int arg_count = 0;
 	char **arg_vector = NULL;
@@ -30,14 +30,10 @@ int get_args(char *cmd)
 		}
 		else
 		{
+			/* getline() succeded */
 			cpy_args(line_buffer, &line_buffer_cpy);
 			tok_args(line_buffer, line_buffer_cpy, &arg_count, &arg_vector);
-
-			/* getline() succeded */
-			if (arg_count > 1)
-				dprintf(2, "%s: No such file or directory\n", cmd);
-			else
-				exe_args(cmd, arg_vector, arg_count, line_buffer, line_buffer_cpy);
+			exe_args(exe, arg_vector, arg_count, line_buffer, line_buffer_cpy);
 		}
 		free(line_buffer_cpy);
 		free(arg_vector);

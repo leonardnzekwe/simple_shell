@@ -2,7 +2,7 @@
 
 /**
  * exe_args - argument execution function
- * @cmd: command name
+ * @exe: executable file name
  * @arg_vector: custom argument vector
  * @arg_count: custom argument count
  * @line_buffer: line_buffer parameter to be freed on failure
@@ -10,7 +10,7 @@
  * Return: Success (0)
  */
 
-int exe_args(char *cmd, char **arg_vector, int arg_count,
+int exe_args(char *exe, char **arg_vector, int arg_count,
 	char *line_buffer, char *line_buffer_cpy)
 {
 	int arg_exe;
@@ -28,7 +28,7 @@ int exe_args(char *cmd, char **arg_vector, int arg_count,
 		process_id = fork();
 		if (process_id == -1)
 		{
-			perror(cmd);
+			perror(exe);
 			free(line_buffer);
 			free(line_buffer_cpy);
 			free(arg_vector);
@@ -39,7 +39,7 @@ int exe_args(char *cmd, char **arg_vector, int arg_count,
 			arg_exe = execve(arg_vector[0], arg_vector, NULL);
 			if (arg_exe == -1)
 			{
-				perror(cmd);
+				perror(exe);
 				free(line_buffer);
 				free(line_buffer_cpy);
 				free(arg_vector);

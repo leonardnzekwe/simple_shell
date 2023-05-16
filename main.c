@@ -9,17 +9,20 @@
 
 int main(int ac, char **av)
 {
-	char *cmd = av[0];
+	/* store the exe filename */
+	char *exe = av[0];
 
+	/* command line args */
 	if (ac > 1)
 	{
 		av = av + 1;
 		ac = ac - 1;
-		exe_args(cmd, av, ac, NULL, NULL);
+		exe_args(exe, av, ac, NULL, NULL);
 	}
 	else
 	{
-		get_args(cmd);
+		/* input not from command line */
+		get_args(exe);
 	}
 	return (0);
 }
