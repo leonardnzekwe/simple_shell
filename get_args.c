@@ -29,6 +29,11 @@ int get_args(char *exe)
 			free(line_buffer);
 			exit(0); /* no further processing, end the loop */
 		}
+		else if (num_char_read == 4 && _strcmp(line_buffer, "env\n") == 0) /*env*/
+		{
+			print_env(); /* print environment */
+			free(line_buffer);
+		}
 		else if (num_char_read == 1 && line_buffer[0] == '\n') /* no line input */
 		{
 			free(line_buffer);
@@ -92,6 +97,29 @@ int process_args(char *exe, int arg_count, char **arg_vector,
 			exe_args(exe, command_path, arg_vector, line_buffer, line_buffer_dup);
 			free(command_path);
 		}
+	}
+	return (0);
+}
+
+/**
+ * print_env - a function that prints the environment
+ * Return: success (0)
+ */
+
+int print_env(void)
+{
+	/* Get the environment variables */
+	char **env_ptr = environ;
+	char *env = NULL;
+	int env_len = 0;
+	/* Print the environment variables */
+	while (*env_ptr != NULL)
+	{
+		env = *env_ptr;
+		env_len = _strlen(env);
+		write(1, env, env_len);
+		write(1, "\n", 1);
+		env_ptr++;
 	}
 	return (0);
 }
