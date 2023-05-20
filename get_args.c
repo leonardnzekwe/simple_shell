@@ -20,7 +20,7 @@ int get_args(char *exe)
 
 		/* Check for interactive and non-interative modes */
 		if (isatty(STDIN_FILENO) != 0)
-			printf("$ ");
+			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
 			check_get_args(line_buffer);
