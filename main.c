@@ -12,17 +12,17 @@ int main(int ac, char **av)
 	/* store the exe filename */
 	char *exe = av[0];
 
-	/* command line args */
-	if (ac > 1)
+	if(ac > 1)
 	{
-		av = av + 1;
-		ac = ac - 1;
-		exe_args(exe, av, ac, NULL, NULL);
+		/* too many command line args */
+		write(STDOUT_FILENO, "Usage: simple_shell\n", 21);
 	}
 	else
 	{
-		/* input not from command line */
+		/* Read, Evaluate, Print & Loop */
+		/* REPL BASE FUNCTION */
 		get_args(exe);
 	}
+	
 	return (0);
 }

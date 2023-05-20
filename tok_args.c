@@ -3,13 +3,13 @@
 /**
  * tok_args - function that tokenise arguments
  * @line_buffer: line buffer parameter
- * @line_buffer_cpy: line buffer copy parameter
+ * @line_buffer_dup: line buffer copy parameter
  * @arg_count: custom argument count
  * @arg_vector: custom argument vector
  * Return: (0)
  */
 
-int tok_args(char *line_buffer, char *line_buffer_cpy,
+int tok_args(char *line_buffer, char *line_buffer_dup,
 		int *arg_count, char ***arg_vector)
 {
 	char *delimiter;
@@ -32,12 +32,12 @@ int tok_args(char *line_buffer, char *line_buffer_cpy,
 	if (*arg_vector == NULL)
 	{
 		free(line_buffer);
-		free(line_buffer_cpy);
+		free(line_buffer_dup);
 		exit(1);
 	}
 
 	/* store tokenized arguments */
-	token = strtok(line_buffer_cpy, delimiter);
+	token = strtok(line_buffer_dup, delimiter);
 	while (token != NULL)
 	{
 		(*arg_vector)[i] = token;

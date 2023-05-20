@@ -4,52 +4,68 @@
  * exe_args - argument execution function
  * @exe: executable file name
  * @arg_vector: custom argument vector
- * @arg_count: custom argument count
  * @line_buffer: line_buffer parameter to be freed on failure
- * @line_buffer_cpy: line_buffer_cpy parameter to be freed on failure
+ * @line_buffer_dup: line_buffer_dup parameter to be freed on failure
+ * @cmd: command parameter (the first index of the argument vector)
  * Return: Success (0)
  */
 
-int exe_args(char *exe, char **arg_vector, int arg_count,
-	char *line_buffer, char *line_buffer_cpy)
+int exe_args(char *exe, char *cmd, char **arg_vector,
+		char *line_buffer, char *line_buffer_dup)
 {
 	int arg_exe;
 	pid_t process_id;
-	int i;
 
-	i = 0;
-	while (arg_vector[i] != NULL)
+	/* Check if the command exists in PATH */
+	if (access(cmd, F_OK) != -1)
 	{
-		i++;
-	}
-	if (arg_count > 0)
-	{
-		/* using execve to execute commands */
+		/* Command exists, execute it */
 		process_id = fork();
 		if (process_id == -1)
 		{
 			perror(exe);
-			free(line_buffer);
-			free(line_buffer_cpy);
-			free(arg_vector);
+			free_mem(arg_vector, line_buffer, line_buffer_dup);
 			exit(1);
 		}
 		else if (process_id == 0)
 		{
-			arg_exe = execve(arg_vector[0], arg_vector, NULL);
+			arg_exe = execve(cmd, arg_vector, NULL);
 			if (arg_exe == -1)
 			{
 				perror(exe);
-				free(line_buffer);
-				free(line_buffer_cpy);
-				free(arg_vector);
-				exit(1);
+				free_mem(arg_vector, line_buffer, line_buffer_dup);
+			}
+			else
+			{
+				free_mem(arg_vector, line_buffer, line_buffer_dup);
 			}
 		}
 		else
 		{
 			wait(NULL);
+			free_mem(arg_vector, line_buffer, line_buffer_dup);
 		}
 	}
+	else
+	{
+		perror(exe);
+		free_mem(arg_vector, line_buffer, line_buffer_dup);
+	}
+	return (0);
+}
+
+/**
+ * free_mem - dynamically allocated memory free function
+ * @arg_vector: custom argument vector to be freed
+ * @line_buffer: line_buffer parameter to be freed
+ * @line_buffer_dup: line_buffer_dup parameter to be freed
+ * Return: Success (0)
+ */
+
+int free_mem(char **arg_vector, char *line_buffer, char *line_buffer_dup)
+{
+	free(arg_vector);
+	free(line_buffer_dup);
+	free(line_buffer);
 	return (0);
 }
