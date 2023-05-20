@@ -12,7 +12,7 @@ int main(int ac, char **av)
 	/* store the exe filename */
 	char *exe = av[0];
 
-	if(ac > 1)
+	if (ac > 1)
 	{
 		/* too many command line args */
 		write(STDOUT_FILENO, "Usage: simple_shell\n", 21);
@@ -23,6 +23,6 @@ int main(int ac, char **av)
 		/* REPL BASE FUNCTION */
 		get_args(exe);
 	}
-	
+
 	return (0);
 }
