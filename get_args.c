@@ -24,6 +24,11 @@ int get_args(char *exe)
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
 			check_get_args(line_buffer);
+		else if (num_char_read == 5 && _strcmp(line_buffer, "exit\n") == 0) /*exit*/
+		{
+			free(line_buffer);
+			exit(0); /* no further processing, end the loop */
+		}
 		else if (num_char_read == 1 && line_buffer[0] == '\n') /* no line input */
 		{
 			free(line_buffer);

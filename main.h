@@ -34,5 +34,6 @@ char *_strchr(const char *str, int c);
 int _strncmp(const char *str1, const char *str2, size_t n);
 char *_strcat(char *dest, const char *src);
 char *_strdup(const char *str);
+int _strcmp(const char *str1, const char *str2);
 
 #endif /* MAIN_H */
