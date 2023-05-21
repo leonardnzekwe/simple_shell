@@ -27,6 +27,7 @@ char *line_buffer, char *line_buffer_dup);
 int process_args(char *exe, int arg_count, char **arg_vector,
 char *line_buffer, char *line_buffer_dup, char *command_path);
 int print_env(void);
+void sigint_handler(int signum);
 
 /* String Manipulation Functions */
 size_t _strlen(const char *str);
