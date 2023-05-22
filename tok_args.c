@@ -21,10 +21,10 @@ int tok_args(char *line_buffer, char *line_buffer_dup,
 	delimiter = " \n";
 
 	/* count number of tokenized args */
-	token = strtok(line_buffer, delimiter);
+	token = _strtok(line_buffer, delimiter);
 	while (token != NULL)
 	{
-		token = strtok(NULL, delimiter);
+		token = _strtok(NULL, delimiter);
 		(*arg_count)++;
 	}
 
@@ -37,11 +37,11 @@ int tok_args(char *line_buffer, char *line_buffer_dup,
 	}
 
 	/* store tokenized arguments */
-	token = strtok(line_buffer_dup, delimiter);
+	token = _strtok(line_buffer_dup, delimiter);
 	while (token != NULL)
 	{
 		(*arg_vector)[i] = token;
-		token = strtok(NULL, delimiter);
+		token = _strtok(NULL, delimiter);
 		i++;
 	}
 	(*arg_vector)[i] = NULL;

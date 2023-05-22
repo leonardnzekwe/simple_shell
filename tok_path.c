@@ -24,7 +24,7 @@ int tok_path(char **command_path, char **arg_vector,
 		exit(1);
 	}
 
-	path_token = strtok(path_env_dup, ":");
+	path_token = _strtok(path_env_dup, ":");
 	while (path_token != NULL)
 	{
 		free(*command_path);
@@ -47,7 +47,7 @@ int tok_path(char **command_path, char **arg_vector,
 		{
 			break; /* stop searching */
 		}
-		path_token = strtok(NULL, ":");
+		path_token = _strtok(NULL, ":");
 	}
 	free(path_env_dup);
 	return (0);
