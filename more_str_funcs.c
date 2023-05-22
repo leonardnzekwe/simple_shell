@@ -111,3 +111,35 @@ char *_strtok(char *str, const char *delimiters)
 	}
 	return (current_token);
 }
+
+/**
+ * _atoi - convert a str representation of an int
+ * To its corresponding int value
+ * @str: string to be converted
+ * Return: int value of str
+ */
+
+int _atoi(const char *str)
+{
+	int sign = 1;
+	int result = 0;
+	int i = 0;
+	/* Handle leading whitespace */
+	while (str[i] == ' ')
+	{
+		i++;
+	}
+	/* Handle optional sign */
+	if (str[i] == '+' || str[i] == '-')
+	{
+		sign = (str[i] == '-') ? -1 : 1;
+		i++;
+	}
+	/* Convert digits to integer */
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + (str[i] - '0');
+		i++;
+	}
+	return (sign * result);
+}
