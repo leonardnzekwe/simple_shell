@@ -44,3 +44,25 @@ char *_strdup(const char *str)
 	}
 	return (dup);
 }
+
+/**
+ * _memcpy - function that copies a block of mem from one location to another
+ * @destination: a ptr to the mem location where the copied data will be stored
+ * It should be large enough to hold num bytes.
+ * @source: a ptr to the memory location from where the data will be copied
+ * @num: specifies the number of bytes to be copied
+ * Return: a ptr to the destination memory location
+ */
+
+void *_memcpy(void *destination, const void *source, size_t num)
+{
+	size_t i;
+	unsigned char *dest = (unsigned char *)destination;
+	const unsigned char *src = (const unsigned char *)source;
+
+	for (i = 0; i < num; i++)
+	{
+		dest[i] = src[i];
+	}
+	return (destination);
+}

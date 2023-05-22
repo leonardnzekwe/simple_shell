@@ -26,16 +26,16 @@ size_t _strlen(const char *str)
 
 char *_strcpy(char *dest, const char *src)
 {
-	char *destPtr = dest;
+	char *dest_ptr = dest;
 
 	while (*src != '\0')
 	{
-		*destPtr = *src;
-		destPtr++;
+		*dest_ptr = *src;
+		dest_ptr++;
 		src++;
 	}
 	/* Add null character at the end */
-	*destPtr = '\0';
+	*dest_ptr = '\0';
 	return (dest);
 }
 

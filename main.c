@@ -12,8 +12,6 @@ int main(int ac, char **av)
 	/* store the exe filename */
 	char *exe = av[0];
 
-	/* Variable to track SIGINT (Ctrl+C) command */
-
 	if (ac > 1)
 	{
 		/* too many command line args */
