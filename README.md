@@ -5,8 +5,8 @@ An ALX SWE Project.
 
 ## Authors
 
-- [@rahma-cloud](https://www.github.com/rahma-cloud)
 - [@leonardnzekwe](https://www.github.com/leonardnzekwe)
+- [@rahma-cloud](https://www.github.com/rahma-cloud)
 
 ## Features
 
