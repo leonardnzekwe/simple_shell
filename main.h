@@ -34,6 +34,8 @@ ssize_t get_line(char **lineptr, size_t *n);
 ssize_t refill_buffer(char *buffer, size_t *buffer_pos, size_t *buffer_size);
 int read_buffer(char *buffer, size_t *buffer_pos, size_t buffer_size,
 size_t *total_read, char **line_ptr, size_t *n);
+void exit_shell(int arg_count, char **arg_vector,
+char *line_buffer, char *line_buffer_dup);
 
 /* String Manipulation Functions */
 size_t _strlen(const char *str);
@@ -45,5 +47,6 @@ char *_strdup(const char *str);
 int _strcmp(const char *str1, const char *str2);
 void *_memcpy(void *destination, const void *source, size_t num);
 char *_strtok(char *str, const char *delimiters);
+int _atoi(const char *str);
 
 #endif /* MAIN_H */
