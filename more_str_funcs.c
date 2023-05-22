@@ -66,3 +66,48 @@ void *_memcpy(void *destination, const void *source, size_t num)
 	}
 	return (destination);
 }
+
+/**
+ * _strtok - string tokenisation function
+ * @str: string to tokenise
+ * @delimiters: delimiters parameter
+ * Return: Success (next_token)
+ */
+
+char *_strtok(char *str, const char *delimiters)
+{
+	static char *next_token;  /* Keeps track of the next token */
+	char *current_token = NULL;
+	/* If str is not NULL, set it as the new string to tokenize */
+	if (str != NULL)
+	{
+		next_token = str;
+	}
+	else if (next_token == NULL)
+	{
+		return (NULL);  /* No more tokens, return NULL */
+	}
+	/* Skip leading delimiters */
+	while (*next_token != '\0' && _strchr(delimiters, *next_token) != NULL)
+	{
+		next_token++;
+	}
+
+	if (*next_token == '\0')
+	{
+		return (NULL);  /* No more tokens, return NULL */
+	}
+	current_token = next_token;  /* Start of the current token */
+	/* Find the end of the current token */
+	while (*next_token != '\0' && _strchr(delimiters, *next_token) == NULL)
+	{
+		next_token++;
+	}
+	/* Set the end of the current token to '\0' and update next_token */
+	if (*next_token != '\0')
+	{
+		*next_token = '\0';
+		next_token++;
+	}
+	return (current_token);
+}
