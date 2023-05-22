@@ -8,7 +8,6 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/wait.h>
-#include <fcntl.h>
 
 /* Global Variable */
 extern char **environ;
@@ -46,5 +45,6 @@ char *_strcat(char *dest, const char *src);
 char *_strdup(const char *str);
 int _strcmp(const char *str1, const char *str2);
 void *_memcpy(void *destination, const void *source, size_t num);
+char *_strtok(char *str, const char *delimiters);
 
 #endif /* MAIN_H */
