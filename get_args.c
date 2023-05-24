@@ -53,6 +53,7 @@ int get_args(char *exe)
 /**
  * check_get_args - function that checks and catches get_args error
  * @line_buffer: line buffer passed as parameter
+ * @buffer_size: buffer size passed as parameter
  * Return: Success (0)
  */
 
