@@ -22,8 +22,8 @@ int get_args(char *exe)
 			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
-			check_get_args(line_buffer, num_char_read);
-		else if (num_char_read == 0) /* End of File (CTRL + D) */
+			check_get_args(line_buffer);
+		else if (num_char_read == 0 || line_buffer[0] == '\0') /* Edge Cases */
 		{
 			free(line_buffer);
 			exit(0);
@@ -52,28 +52,16 @@ int get_args(char *exe)
 /**
  * check_get_args - function that checks and catches get_args error
  * @line_buffer: line buffer passed as parameter
- * @num_char_read: number of characters read
  * Return: Success (0)
  */
 
-int check_get_args(char *line_buffer, ssize_t num_char_read)
+int check_get_args(char *line_buffer)
 {
 	/* catch getline() failure scenarios */
 	if (line_buffer == NULL)
 	{
 		/* Memory allocation failed */
 		exit(1);
-	}
-	else if (num_char_read == 0)
-	{
-		/* No Read */
-		free(line_buffer);
-		exit(1);
-	}
-	else if (feof(stdin)) /* Check if end-of-file (CTRL + D) */
-	{
-		free(line_buffer);
-		exit(0);
 	}
 	else
 	{
