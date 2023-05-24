@@ -23,10 +23,13 @@ int get_args(char *exe)
 		num_char_read = get_line(&line_buffer, &buffer_size);
 		if (num_char_read == -1) /* getline() failed */
 			check_get_args(line_buffer);
-		else if (_strncmp(line_buffer, "exit", 3) == 0) /*exit*/
+		else if (num_char_read == 0) /* End of File (EOF) */
 		{
-			exit_shell(arg_count, arg_vector, line_buffer, line_buffer_dup);
+			free(line_buffer);
+			exit(0);
 		}
+		else if (_strncmp(line_buffer, "exit", 3) == 0) /*exit*/
+			exit_shell(arg_count, arg_vector, line_buffer, line_buffer_dup);
 		else if (num_char_read == 4 && _strcmp(line_buffer, "env\n") == 0) /*env*/
 		{
 			print_env(); /* print environment */
@@ -64,7 +67,7 @@ int check_get_args(char *line_buffer)
 	{
 		/* End of File (CTRL + D) */
 		free(line_buffer);
-		exit(1);
+		exit(0);
 	}
 	return (0);
 }
