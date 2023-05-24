@@ -21,7 +21,7 @@ char *line_buffer, char *line_buffer_dup);
 int dup_args(char *line_buffer, char **line_buffer_dup);
 int tok_args(char *line_buffer, char *line_buffer_dup,
 int *arg_count, char ***arg_vector);
-int check_get_args(char *line_buffer);
+int check_get_args(char *line_buffer, ssize_t num_char_read);
 char *_getenv(const char *name);
 int free_mem(char **arg_vector, char *line_buffer, char *line_buffer_dup);
 int tok_path(char **command_path, char **arg_vector,

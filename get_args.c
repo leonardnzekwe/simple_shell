@@ -21,10 +21,9 @@ int get_args(char *exe)
 		if (isatty(STDIN_FILENO) != 0) /* Check mode of interactivity */
 			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
-		if (num_char_read == -1 || num_char_read == 0) /* getline() failed */
+		if (num_char_read == -1) /* getline() failed */
 		{
-			free(line_buffer);
-			break;
+			check_get_args(line_buffer, num_char_read);
 		}
 		else if (_strncmp(line_buffer, "exit", 3) == 0) /*exit*/
 			exit_shell(arg_count, arg_vector, line_buffer, line_buffer_dup);
@@ -53,7 +52,7 @@ int get_args(char *exe)
  * Return: Success (0)
  */
 
-int check_get_args(char *line_buffer)
+int check_get_args(char *line_buffer, ssize_t num_char_read)
 {
 	/* catch getline() failure scenarios */
 	if (line_buffer == NULL)
@@ -61,10 +60,17 @@ int check_get_args(char *line_buffer)
 		/* Memory allocation failed */
 		exit(1);
 	}
+	else if (num_char_read == 0)
+	{
+		/* No Read */
+		free(line_buffer);
+		exit(1);
+	}
 	else
 	{
 		/* End of File (CTRL + D) */
 		free(line_buffer);
+		exit(0);
 	}
 	return (0);
 }
