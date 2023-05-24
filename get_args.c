@@ -20,7 +20,7 @@ int get_args(char *exe)
 
 		if (isatty(STDIN_FILENO) != 0) /* Check mode of interactivity */
 			write(STDOUT_FILENO, "$ ", 3);
-		num_char_read = get_line(&line_buffer, &buffer_size);
+		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
 			check_get_args(line_buffer);
 		else if (num_char_read == 0) /* End of File (EOF) */
