@@ -8,6 +8,8 @@
 
 int get_args(char *exe)
 {
+	int prompt_count = 0;
+
 	while (1)
 	{
 		int arg_count = 0;
@@ -18,16 +20,16 @@ int get_args(char *exe)
 		char *line_buffer_dup = NULL;
 		char *command_path = NULL;
 
+		prompt_count++;
 		if (isatty(STDIN_FILENO) != 0) /* Check mode of interactivity */
 			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
 			check_get_args(line_buffer, buffer_size);
-		else if ((num_char_read == 0 && line_buffer[0] == '\0')
-		|| (num_char_read == 0)) /* EOF Edge Case */
+		else if (num_char_read == 0) /* No Read */
 		{
 			free(line_buffer);
-			exit(0);
+			exit(EXIT_SUCCESS);
 		}
 		else if (_strncmp(line_buffer, "exit", 3) == 0) /*exit*/
 			exit_shell(arg_count, arg_vector, line_buffer, line_buffer_dup);
@@ -42,12 +44,9 @@ int get_args(char *exe)
 			continue; /* no further processing, restart the loop */
 		}
 		else /* getline() succeded */
-		{
-			process_args(exe, arg_count, arg_vector, line_buffer,
+			process_args(exe, prompt_count, arg_count, arg_vector, line_buffer,
 				line_buffer_dup, command_path);
-		}
-	}
-	return (0);
+	} return (0);
 }
 
 /**
@@ -63,13 +62,17 @@ int check_get_args(char *line_buffer, size_t buffer_size)
 	if (line_buffer == NULL || buffer_size == 0)
 	{
 		/* Memory allocation failed */
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		/* End of File (CTRL + D) */
+		if (isatty(STDIN_FILENO) != 0) /* Check mode of interactivity */
+		{
+			write(STDOUT_FILENO, "\n", 1);
+		}
 		free(line_buffer);
-		exit(0);
+		exit(EXIT_SUCCESS);
 	}
 	return (0);
 }

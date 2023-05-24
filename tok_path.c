@@ -21,7 +21,7 @@ int tok_path(char **command_path, char **arg_vector,
 	if (path_env_dup == NULL)
 	{
 		free_mem(arg_vector, line_buffer, line_buffer_dup);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	path_token = _strtok(path_env_dup, ":");
@@ -35,7 +35,7 @@ int tok_path(char **command_path, char **arg_vector,
 		{
 			free(path_env_dup);
 			free_mem(arg_vector, line_buffer, line_buffer_dup);
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 
 		/* Create the full path to the command */

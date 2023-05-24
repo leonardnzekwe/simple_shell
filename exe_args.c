@@ -3,6 +3,7 @@
 /**
  * exe_args - argument execution function
  * @exe: executable file name
+ * @prompt_count: keeps count of prompt loop
  * @arg_vector: custom argument vector
  * @line_buffer: line_buffer parameter to be freed on failure
  * @line_buffer_dup: line_buffer_dup parameter to be freed on failure
@@ -10,7 +11,7 @@
  * Return: Success (0)
  */
 
-int exe_args(char *exe, char *cmd, char **arg_vector,
+int exe_args(char *exe, int prompt_count, char *cmd, char **arg_vector,
 		char *line_buffer, char *line_buffer_dup)
 {
 	int arg_exe;
@@ -25,7 +26,7 @@ int exe_args(char *exe, char *cmd, char **arg_vector,
 		{
 			perror(exe);
 			free_mem(arg_vector, line_buffer, line_buffer_dup);
-			exit(1);
+			exit(EXIT_FAILURE);
 		}
 		else if (process_id == 0)
 		{
@@ -48,7 +49,7 @@ int exe_args(char *exe, char *cmd, char **arg_vector,
 	}
 	else
 	{
-		perror(exe);
+		_printf("%s: %d: %s: not found\n", exe, prompt_count, arg_vector[0]);
 		free_mem(arg_vector, line_buffer, line_buffer_dup);
 	}
 	return (0);

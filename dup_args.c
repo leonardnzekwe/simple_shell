@@ -13,7 +13,7 @@ int dup_args(char *line_buffer, char **line_buffer_dup)
 	if (*line_buffer_dup == NULL)
 	{
 		free(line_buffer);
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 	return (0);
 }
