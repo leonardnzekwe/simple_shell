@@ -29,7 +29,7 @@ int exe_args(char *exe, char *cmd, char **arg_vector,
 		}
 		else if (process_id == 0)
 		{
-			arg_exe = execve(cmd, arg_vector, NULL);
+			arg_exe = execve(cmd, arg_vector, environ);
 			if (arg_exe == -1)
 			{
 				perror(exe);
