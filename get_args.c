@@ -64,11 +64,16 @@ int check_get_args(char *line_buffer, ssize_t num_char_read)
 		/* Memory allocation failed */
 		exit(1);
 	}
-	else if (num_char_read == 0 || line_buffer[0] == '\0')
+	else if (num_char_read == 0)
 	{
 		/* No Read */
 		free(line_buffer);
 		exit(1);
+	}
+	else if (feof(stdin)) /* Check if end-of-file (CTRL + D) */
+	{
+		free(line_buffer);
+		exit(0);
 	}
 	else
 	{
