@@ -21,13 +21,8 @@ int get_args(char *exe)
 		if (isatty(STDIN_FILENO) != 0) /* Check mode of interactivity */
 			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
-		if (num_char_read == -1) /* getline() failed */
+		if (num_char_read == -1 || num_char_read == 0) /* getline() failed */
 			check_get_args(line_buffer);
-		else if (num_char_read == 0) /* End of File (EOF) */
-		{
-			free(line_buffer);
-			exit(0);
-		}
 		else if (_strncmp(line_buffer, "exit", 3) == 0) /*exit*/
 			exit_shell(arg_count, arg_vector, line_buffer, line_buffer_dup);
 		else if (num_char_read == 4 && _strcmp(line_buffer, "env\n") == 0) /*env*/
