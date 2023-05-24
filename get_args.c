@@ -22,8 +22,9 @@ int get_args(char *exe)
 			write(STDOUT_FILENO, "$ ", 3);
 		num_char_read = getline(&line_buffer, &buffer_size, stdin);
 		if (num_char_read == -1) /* getline() failed */
-			check_get_args(line_buffer);
-		else if (num_char_read == 0 || line_buffer[0] == '\0') /* Edge Cases */
+			check_get_args(line_buffer, buffer_size);
+		else if ((num_char_read == 0 && line_buffer[0] == '\0')
+		|| (num_char_read == 0)) /* EOF Edge Case */
 		{
 			free(line_buffer);
 			exit(0);
@@ -55,10 +56,10 @@ int get_args(char *exe)
  * Return: Success (0)
  */
 
-int check_get_args(char *line_buffer)
+int check_get_args(char *line_buffer, size_t buffer_size)
 {
 	/* catch getline() failure scenarios */
-	if (line_buffer == NULL)
+	if (line_buffer == NULL || buffer_size == 0)
 	{
 		/* Memory allocation failed */
 		exit(1);
