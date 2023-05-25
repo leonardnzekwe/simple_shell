@@ -37,6 +37,7 @@ size_t *total_read, char **line_ptr, size_t *n);
 void exit_shell(int arg_count, char **arg_vector,
 char *line_buffer, char *line_buffer_dup);
 int is_all_white_space(const char *line_buffer);
+int parent_wait(char **arg_vector, char *line_buffer, char *line_buffer_dup);
 
 /* Custom C Library Functions */
 char *_getenv(const char *name);
