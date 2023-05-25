@@ -34,7 +34,7 @@ void sigint_handler(int signum);
 ssize_t refill_buffer(char *buffer, size_t *buffer_pos, size_t *buffer_size);
 int read_buffer(char *buffer, size_t *buffer_pos, size_t buffer_size,
 size_t *total_read, char **line_ptr, size_t *n);
-void exit_shell(int arg_count, char **arg_vector,
+void exit_shell(int prompt_count, char *exe, int arg_count, char **arg_vector,
 char *line_buffer, char *line_buffer_dup);
 int is_all_white_space(const char *line_buffer);
 int parent_wait(char **arg_vector, char *line_buffer, char *line_buffer_dup);
@@ -56,9 +56,11 @@ char *_strtok(char *str, const char *delimiters);
 int _atoi(const char *str);
 int _isspace(int character);
 int _putchar(char c);
+int _isdigit(int c);
 
 /**
  * struct format_specifier - format specifier structure
+ * For the printf function
  * @fmt_sign: fomat sign parameter
  * @fmt_func_ptr: format function parameter
  */
@@ -70,6 +72,10 @@ typedef struct format_specifier
 } fmt;
 
 /* Custom printf function */
+/* From our (0x11: C - printf) project */
+/* Only change is in the stream of the write */
+/* In the _putchar function, it writes to stderr */
+
 int _printf(const char *format, ...);
 int print_fmt(const char *format, va_list args,
 int *count, int *num_args, fmt fmt_specs[], int fmt_len);

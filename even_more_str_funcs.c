@@ -20,5 +20,21 @@ int _isspace(int character)
 
 int _putchar(char c)
 {
-	return (write(1, &c, 1));
+    /* modified to print to stderr (2) */
+	return (write(STDERR_FILENO, &c, 1));
+}
+
+/**
+ * _isdigit - checks if a character is a digit
+ * @c: character to check
+ * Return: 1 if character is a digit, 0 otherwise
+ */
+
+int _isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+	{
+		return (1); /* Character is a digit */
+	}
+	return (0); /* Character is not a digit */
 }
