@@ -56,14 +56,17 @@ An ALX SWE Project.
 ## Files
 
 - **_getenv.c:** contains the `_getenv`, a custom definition of the `getenv` function.
-- **AUTHORS:** conatains git log generated list of contributors to the project.
+- **_printf.c:** contains the `_printf` function and its helper functions, the custom printf is from our implementation of (0x11: C - printf) project.
+- **AUTHORS:** contains git log generated list of contributors to the project.
 - **dup_args.c:** contains the `dup_args` function that duplicates the arguments.
 - **exe_args.c:** conatains the `exe_args` and `free_mem` function that executes valid commands and free dynamically allocated memories, respectively.
+- **even_more_str_funcs.c:** contains `_isspace` `_putchar` `_isdigit` functions, which are used for operations on characters & integers.
 - **exit_shell.c:** contains the `exit_shell` function that exit the shell either with a status code or without.
 - **get_args.c:** contains the `get_args` REPL base function and `check_get_args` function that catches the error cases of the `get_args` function.
 - **get_line.c:** contains `get_line` function with its helper functions `refill_buffer` and `read_buffer`. The `get_line` is a custom implementation of the C standard `getline`  function.
 - **main.c:** contains the `main` function, which is the entry point of the program. It also contains the `sigint_handler` function which gets excutes when the program recieves a `SIGINT` in the `signal` std functions.
 - **main.h:** contains all the header files, global variables, macro definition, REPL function protoytpes and string manipulation functions prototypes.
+- **more_printf_funcs.c:** contains more helper functions to the `_printf` function.
 - **more_str_funcs:** contains `_strcmp` `_strdup` `_memcpy` `_strtok` `_atoi` functions, which are used for string manipulation operations.
 - **print_env.c:** contains the `print_env` function, that prints the environment variables.
 - **process_args.c:** contains `process_args`, a helper function to `get_args` function.
@@ -81,5 +84,5 @@ An ALX SWE Project.
 
 ## Limitations
 
-- The simple shell implementation doesn't yet handle special characters : ", ', `, \, *, &, #
+- The simple shell implementation doesn't yet handle special characters : `"`, `'`, \`, `\`, `*`, `&`, `#`
 - It's yet to be able to move the cursor
