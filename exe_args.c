@@ -67,7 +67,6 @@ int free_mem(char **arg_vector, char *line_buffer, char *line_buffer_dup)
 
 /**
  * parent_wait - function that waits on the child process
- * @cmd: command parameter to be freed
  * @arg_vector: custom argument vector to be freed
  * @line_buffer: line_buffer parameter to be freed
  * @line_buffer_dup: line_buffer_dup parameter to be freed
