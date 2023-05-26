@@ -24,24 +24,29 @@ void exit_shell(int prompt_count, char *exe, int arg_count, char **arg_vector,
 	{
 		while (arg_vector[1][i] != '\0')
 		{
-			if (_isdigit(arg_vector[1][i]) == 0)
+			if (_isdigit(arg_vector[1][i]) == 0) /* is an alpha */
 			{
 				exit_err(exe, prompt_count, arg_vector,
 					line_buffer, line_buffer_dup);
 			}
 			i++;
 		}
-		exit_status = _atoi(arg_vector[1]);
+		exit_status = _atoi(arg_vector[1]); /* convert to int */
 		if (exit_status < 0)
 		{
 			exit_err(exe, prompt_count, arg_vector, line_buffer, line_buffer_dup);
+		}
+		else
+		{
+			free_mem(arg_vector, line_buffer, line_buffer_dup);
+			exit(exit_status);
 		}
 	}
 	else
 	{
 		free_mem(arg_vector, line_buffer, line_buffer_dup);
+		exit(exit_status);
 	}
-	exit(exit_status);
 }
 
 /**
