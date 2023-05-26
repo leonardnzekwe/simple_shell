@@ -37,8 +37,7 @@ size_t *total_read, char **line_ptr, size_t *n);
 void exit_shell(int prompt_count, char *exe, int arg_count, char **arg_vector,
 char *line_buffer, char *line_buffer_dup);
 int is_all_white_space(const char *line_buffer);
-int parent_wait(char *cmd, char **arg_vector,
-char *line_buffer, char *line_buffer_dup);
+int parent_wait(char **arg_vector, char *line_buffer, char *line_buffer_dup);
 int path_err(char *exe, int prompt_count,
 char **arg_vector, char *line_buffer, char *line_buffer_dup);
 int exit_err(char *exe, int prompt_count, char **arg_vector,

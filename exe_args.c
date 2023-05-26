@@ -40,7 +40,7 @@ int exe_args(char *exe, int prompt_count, char *cmd, char **arg_vector,
 				free_mem(arg_vector, line_buffer, line_buffer_dup);
 		}
 		else
-			parent_wait(cmd, arg_vector, line_buffer, line_buffer_dup);
+			parent_wait(arg_vector, line_buffer, line_buffer_dup);
 	}
 	else
 	{
@@ -74,8 +74,7 @@ int free_mem(char **arg_vector, char *line_buffer, char *line_buffer_dup)
  * Return: Success (0)
  */
 
-int parent_wait(char *cmd, char **arg_vector,
-	char *line_buffer, char *line_buffer_dup)
+int parent_wait(char **arg_vector, char *line_buffer, char *line_buffer_dup)
 {
 	int cmd_exit_status = 0;
 
@@ -86,11 +85,13 @@ int parent_wait(char *cmd, char **arg_vector,
 	}
 	if (cmd_exit_status != 0 && isatty(STDIN_FILENO) == 0)
 	{
-		free(cmd);
 		free_mem(arg_vector, line_buffer, line_buffer_dup);
 		exit(2);
 	}
-	free_mem(arg_vector, line_buffer, line_buffer_dup);
+	else
+	{
+		free_mem(arg_vector, line_buffer, line_buffer_dup);
+	}
 
 	return (0);
 }
