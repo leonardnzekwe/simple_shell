@@ -29,7 +29,8 @@ int process_args(char *exe, int prompt_count, int arg_count, char **arg_vector,
 				arg_vector, line_buffer, line_buffer_dup);
 		else
 		{
-			tok_path(&command_path, arg_vector, line_buffer, line_buffer_dup);
+			tok_path(exe, prompt_count, &command_path,
+				arg_vector, line_buffer, line_buffer_dup);
 			exe_args(exe, prompt_count, command_path,
 				arg_vector, line_buffer, line_buffer_dup);
 			free(command_path);

@@ -26,20 +26,40 @@ void exit_shell(int prompt_count, char *exe, int arg_count, char **arg_vector,
 		{
 			if (_isdigit(arg_vector[1][i]) == 0)
 			{
-				_printf("%s: %d: %s: Illegal number: %s\n",
-					exe, prompt_count, arg_vector[0], arg_vector[1]);
-				exit(2);
+				exit_err(exe, prompt_count, arg_vector,
+					line_buffer, line_buffer_dup);
 			}
 			i++;
 		}
 		exit_status = _atoi(arg_vector[1]);
 		if (exit_status < 0)
 		{
-			_printf("%s: %d: %s: Illegal number: %s\n",
-				exe, prompt_count, arg_vector[0], arg_vector[1]);
-			exit(2);
+			exit_err(exe, prompt_count, arg_vector, line_buffer, line_buffer_dup);
 		}
 	}
-	free_mem(arg_vector, line_buffer, line_buffer_dup);
+	else
+	{
+		free_mem(arg_vector, line_buffer, line_buffer_dup);
+	}
 	exit(exit_status);
+}
+
+/**
+ * exit_err - path err catch function
+ * @exe: executable file name
+ * @prompt_count: keeps count of prompt loop
+ * @arg_vector: custom argument vector
+ * @line_buffer: line_buffer parameter to be freed on failure
+ * @line_buffer_dup: line_buffer_dup parameter to be freed on failure
+ * Return: Success (0)
+ */
+
+int exit_err(char *exe, int prompt_count,
+	char **arg_vector, char *line_buffer, char *line_buffer_dup)
+{
+	_printf("%s: %d: %s: Illegal number: %s\n",
+		exe, prompt_count, arg_vector[0], arg_vector[1]);
+	free_mem(arg_vector, line_buffer, line_buffer_dup);
+	exit(2);
+	return (0);
 }
