@@ -56,7 +56,7 @@ An ALX SWE Project.
 ## Files
 
 - **_getenv.c:** contains the `_getenv`, a custom definition of the `getenv` function.
-- **_printf.c:** contains the `_printf` function and its helper functions, the custom printf is from our implementation of (0x11: C - printf) project.
+- **_printf.c:** contains the `_printf` function and its helper functions, the custom printf is from our implementation of [0x11: C - printf](https://github.com/leonardnzekwe/printf) project.
 - **AUTHORS:** contains git log generated list of contributors to the project.
 - **dup_args.c:** contains the `dup_args` function that duplicates the arguments.
 - **exe_args.c:** conatains the `exe_args` and `free_mem` function that executes valid commands and free dynamically allocated memories, respectively.
