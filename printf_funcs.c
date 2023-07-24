@@ -33,19 +33,12 @@ void string_print(char __attribute__ ((unused)) flag, va_list args,
 	int *count, char __attribute__ ((unused)) space)
 {
 	char *s;
-	char *null;
-	int i, j;
+	int i;
 
-	null = "(null)";
 	s = va_arg(args, char *);
 	if (s == NULL)
 	{
-		for (j = 0; null[j] != '\0'; j++)
-		{
-			_putchar(null[j]);
-			(*count)++;
-		}
-		return;
+		s = "(null)";
 	}
 	for (i = 0; s[i] != '\0'; i++)
 	{

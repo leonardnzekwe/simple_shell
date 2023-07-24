@@ -20,7 +20,7 @@ int _isspace(int character)
 
 int _putchar(char c)
 {
-    /* modified to print to stderr (2) */
+	/* modified to print to stderr (2) */
 	return (write(STDERR_FILENO, &c, 1));
 }
 

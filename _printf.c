@@ -9,8 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int count, num_args;
-	int fmt_len;
+	int count;
 	/* struct two dimensional array */
 	fmt fmt_specs[] = {
 		{'c', char_print}, {'s', string_print}, {'d', dec_print},
@@ -20,24 +19,16 @@ int _printf(const char *format, ...)
 	};
 
 	count = 0;
-	num_args = 0;
-	fmt_len = 0;
 	va_start(args, format);
+
 	if (format != NULL)
 	{
-		while (format[fmt_len] != '\0')
-		{
-			fmt_len++;
-		}
-		if (print_fmt(format, args, &count, &num_args, fmt_specs, fmt_len) != -1)
-		{
-			count = count;
-		}
+		if (print_fmt(format, args, &count, fmt_specs) == -1)
+			return (-1);
 	}
 	else
-	{
 		return (-1);
-	}
+
 	va_end(args);
 	return (count);
 }
@@ -47,14 +38,12 @@ int _printf(const char *format, ...)
  * @format: named parameter specification of format
  * @args: variable arguments list
  * @count: pointer to integer to store the count of characters printed
- * @num_args: number of argument passed to the variadic function
  * @fmt_specs: struct two dimensional array, typedefed to fmt
- * @fmt_len: length of format string
  * Return: the number of characters printed
  */
 
 int print_fmt(const char *format, va_list args,
-		int *count, int *num_args, fmt fmt_specs[], int fmt_len)
+		int *count, fmt fmt_specs[])
 {
 	int i;
 	char flag = '\0';
@@ -82,20 +71,18 @@ int print_fmt(const char *format, va_list args,
 				{ flag = format[i];
 					i++; }
 			} /* check standalone %, flag and if %, flag is the last char */
-			if (i == fmt_len)
-			{ (*count) = -1;
-				break; }
+			if (format[i] == '\0')
+				return (-1);
 			/* search for corresponding conversion specifier */
 			if (!handle_fmt_spec(format[i], args,
-						count, num_args, fmt_specs, &flag, &space))
+				count, fmt_specs, &flag, &space))
 			{ _putchar('%');
 				_putchar(format[i]);
 				(*count) += 2;
 			}
 		}
 	}
-	/* check if the num of args specifiers processed == args passed */
-	return (*num_args == va_arg(args, int) ? (*count) : -1);
+	return (0);
 }
 
 /**
@@ -103,7 +90,6 @@ int print_fmt(const char *format, va_list args,
  * @fmt_char: the format specifier
  * @args: variable arguments list
  * @count: pointer to integer to store the count of characters printed
- * @num_args: number of argument passed to the variadic function
  * @fmt_specs: struct two dimensional array, typedefed to fmt
  * @flag: pointer to flag character
  * @space: pointer to space character
@@ -111,7 +97,7 @@ int print_fmt(const char *format, va_list args,
  */
 
 bool handle_fmt_spec(char fmt_char, va_list args, int *count,
-		int *num_args, fmt fmt_specs[], char *flag, char *space)
+		fmt fmt_specs[], char *flag, char *space)
 {
 	int j;
 
@@ -125,8 +111,6 @@ bool handle_fmt_spec(char fmt_char, va_list args, int *count,
 	{
 		if (fmt_char == fmt_specs[j].fmt_sign) /* valid fmt handling */
 		{
-			/* increment num_args when a valid fmt spec is found */
-			(*num_args)++;
 			fmt_specs[j].fmt_func_ptr(*flag, args, count, *space);
 			return (true);
 		}

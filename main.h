@@ -82,7 +82,7 @@ typedef struct format_specifier
 
 int _printf(const char *format, ...);
 int print_fmt(const char *format, va_list args,
-int *count, int *num_args, fmt fmt_specs[], int fmt_len);
+int *count, fmt fmt_specs[]);
 void char_print(char flag, va_list args, int *count, char space);
 void string_print(char flag, va_list args, int *count, char space);
 void int_print(char flag, va_list args, int *count, char space);
@@ -96,6 +96,6 @@ void str_hex_print(char flag, va_list args, int *count, char space);
 void ptr_print(char flag, va_list args, int *count, char space);
 void zero(char *nil, int *count);
 bool handle_fmt_spec(char fmt_char, va_list args,
-int *count, int *num_args, fmt fmt_specs[], char *flag, char *space);
+int *count, fmt fmt_specs[], char *flag, char *space);
 
 #endif /* MAIN_H */
