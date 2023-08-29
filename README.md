@@ -1,7 +1,6 @@
 # C - SIMPLE SHELL
 
-A simple UNIX command interpreter.
-An ALX SWE Project.
+Custom Implementation of a Simple UNIX Command Interpreter
 
 ## Authors
 
